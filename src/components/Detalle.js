@@ -11,43 +11,75 @@ import '../assets/css/Detalle.css'
 
 class Detalle extends Component {
 
+// Dominios a hacer el llamado de server
+// en caso de hacerlo a heroku usar:
+// https://restserver-instrumentos.herokuapp.com
+// en caso de usar el proyecto localmente, usar:
+//http://localhost:9000
+
+
     constructor() {
         super();
         this.state = {
-            instrumentos
+            db:[]
         }
     }
+    componentDidMount(){
+        let id = this.props.match.params.id;
+        
+        fetch('https://restserver-instrumentos.herokuapp.com/instrumento/'+id)
+        .then((response)=>response.json())
+        .then((responseJson)=>{
+          this.setState({db: responseJson.instrumentos});
+        })
 
+        
+    }
+    componentWillUnmount(){
+    
+        console.log('ciclo desmontado')
+      }
+    getInstrumentoXID(){
+        
+
+       
+    }
+    
     render() {
-        const parametroId = this.props.match.params.id;
-        const instrEnc = instrumentos.filter(instrumento => instrumento.id === parametroId);
+        
+       
+        const instrEnc = this.state.db;
         
         
-        console.log('estoy aca'+parametroId);
-        console.log('Id ::'+instrEnc[0].id);
+        const imageurl = "https://restserver-instrumentos.herokuapp.com/images/" + instrEnc.imagen;
+        
         
         return (
+            
             <React.Fragment>
                 <Navigation></Navigation>
                 <Container>
                     <Row>
-        <Col className="uno" md="9"><Image src={require(`../assets/images/${instrEnc[0].imagen}`)} style= {{width: '90%', height:'40%'}}></Image>
-        <p>Descripcion:</p><br></br><p>{instrEnc[0].descripcion}</p></Col>
+        <Col className="uno" md="9">
+        <img alt="plato" className="minAltoImg" src={imageurl}  style={{ width: '50%' }} />
+        <p>Descripcion:</p><br></br><p>{instrEnc.descripcion}</p></Col>
         <Col md="3">
         
-        <p>{instrEnc[0].cantidadVendida} Vendidos</p><br></br>
-            <h3>{instrEnc[0].instrumento}</h3>
+        <p>{instrEnc.cantidadVendida} Vendidos</p><br></br>
+            <h3>{instrEnc.instrumento}</h3>
         <br></br>
-        <h1>${instrEnc[0].precio}</h1>
+        <h1>${instrEnc.precio}</h1>
         <br></br>
-        <p>Marca: {instrEnc[0].marca}
+        <p>Marca: {instrEnc.marca}
         <br></br>
-        Modelo: {instrEnc[0].modelo}
+        Modelo: {instrEnc.modelo}
         </p>
         <p>
-            Costo envio: {comprobarEnvio(instrEnc[0].costoEnvio)}
+            Costo envio: {comprobarEnvio(instrEnc.costoEnvio)}
         </p>
-        <Button variant="outline-primary">Agregar al Carrito</Button>
+
+        <Button variant="outline-primary" size="sm">Agregar al Carrito</Button>
+        <Button variant="danger" size="sm" block>Eliminar de Mongo</Button>
         </Col>
                     </Row>
                 </Container>
@@ -67,3 +99,8 @@ function comprobarEnvio(costoEnvio) {
   }
 
 export default Detalle;
+
+function borrarInstrumento() {
+
+    
+}

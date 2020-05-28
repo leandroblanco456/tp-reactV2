@@ -13,6 +13,7 @@ class Navigation extends Component {
                 <Nav.Link href="/home">Home</Nav.Link>
                 <Nav.Link href="/about">Donde Estamos</Nav.Link>
                 <Nav.Link href="/productos">Productos</Nav.Link>
+                <Nav.Link href="/agregarInstrumento">Agregar Instrumento</Nav.Link>
                 </Nav>
                
 

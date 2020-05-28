@@ -7,6 +7,8 @@ import '../assets/css/Tarjeta.css';
 
 class Tarjeta extends Component {
   render() {
+
+    
     return (
       <React.Fragment>
        
@@ -14,7 +16,7 @@ class Tarjeta extends Component {
           <ListGroup.Item>
             <Card >
             <Row>
-              <Card.Img variant="top" src={require(`../assets/images/${this.props.imagen}`)} style={{ width: '50%' }}/>
+              <Card.Img variant="top" src={this.props.imagen} style={{ width: '50%' }}/>
               <Card.Body >
     <Card.Subtitle>{this.props.nombre}<ul></ul></Card.Subtitle>
                 <Card.Title>${this.props.precio}<ul></ul></Card.Title>  

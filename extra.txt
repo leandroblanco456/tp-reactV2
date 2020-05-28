@@ -1,0 +1,32 @@
+ const instrumentoEncontrado = this.state.instrumento;
+        
+        
+        const instrEnc = this.state.instrumento.filter(instrumento => instrumento.id === this.stateparametroId);
+        console.log(instrEnc[0])
+        
+        
+
+
+
+          <Container>
+                    <Row>
+        <Col className="uno" md="9"><Image src={require(`../assets/images/${this.state.db.imagen}`)} style= {{width: '90%', height:'40%'}}></Image>
+        <p>Descripcion:</p><br></br><p>{instrEnc[0].descripcion}</p></Col>
+        <Col md="3">
+        
+        <p>{this.state.db.cantidadVendida} Vendidos</p><br></br>
+            <h3>{this.state.db.instrumento}</h3>
+        <br></br>
+        <h1>${this.state.db.precio}</h1>
+        <br></br>
+        <p>Marca: {this.state.db.marca}
+        <br></br>
+        Modelo: {this.state.db.modelo}
+        </p>
+        <p>
+            Costo envio: {comprobarEnvio(this.state.db.costoEnvio)}
+        </p>
+        <Button variant="outline-primary">Agregar al Carrito</Button>
+        </Col>
+                    </Row>
+                </Container>
